@@ -10,7 +10,7 @@ export default function Participate({
     erc20Instance,
     buyToken,
     availableBalance,
-    balanaceNeeded,
+    balanceNeeded,
     callback,
 }) {
     const [approving, setApproving] = useState(false);
@@ -26,18 +26,29 @@ export default function Participate({
 
     const handleParticipate = async () => {
         try {
+            const decimals = Number(
+                await erc20Instance.methods.decimals()
+                    .call()
+            );
+
+            console.log(decimals)
+
             const allowance = await precision.remove(
                 await erc20Instance.methods.allowance(
                     window.userAddress,
                     poolAddress,
                 ).call(),
-                18
+                decimals,
             );
 
-            if (Number(allowance) >= Number(balanaceNeeded)) {
+            if (Number(allowance) >= Number(balanceNeeded)) {
                 participate();
             } else {
-                const success = await approveToken(allowance);
+                const success = await approveToken(
+                    allowance,
+                    decimals,
+                );
+
                 if (success) {
                     participate();
                 }
@@ -72,14 +83,14 @@ export default function Participate({
         });
     }
 
-    const approveToken = (allowance) => {
+    const approveToken = (allowance, decimals) => {
         return new Promise(async (resolve, reject) => {
             erc20Instance.methods.approve
                 (
                     poolAddress,
                     await precision.add(
-                        Number(balanaceNeeded) - Number(allowance),
-                        18
+                        Number(balanceNeeded) - Number(allowance),
+                        decimals,
                     )
                 )
                 .send()
@@ -107,7 +118,7 @@ export default function Participate({
                     <u>Buy Ticket</u>
                 </Card.Header>
 
-                {availableBalance >= balanaceNeeded ?
+                {Number(availableBalance) >= Number(balanceNeeded) ?
                     <Card.Body>
                         <div style={{ marginBottom: "20px", color: "orange" }}>
                             You are about to buy a ticket in the pool.
@@ -126,7 +137,7 @@ export default function Participate({
                             <Col>
                                 <u>Balance Needed</u>
                                 <span> : </span>
-                                <span>{balanaceNeeded} {buyToken}</span>
+                                <span>{balanceNeeded} {buyToken}</span>
                             </Col>
                         </Row>
 

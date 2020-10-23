@@ -5,7 +5,7 @@ import { Card, CardDeck, Image } from "react-bootstrap";
 import { time } from "../../utils/time";
 
 export default function HomePage() {
-    const dai = "0xFf795577d9AC8bD7D90Ee22b6C1703490b6512FD";
+    const dai = "0x5A01Ea01Ba9A8DC2B066714A65E61a78838B1b9e";
     const [loanPools, setlLoanPools] = useState([]);
     const [loading, setLoading] = useState(true);
     const [noMetamsk, setNoMetamask] = useState(false);

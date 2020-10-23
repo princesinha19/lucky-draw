@@ -24,7 +24,7 @@ export default function CreatePool() {
         ticketPrice: "",
         drawInterval: "",
         tokenBuyDuration: "",
-        ticketBuyToken: "0xFf795577d9AC8bD7D90Ee22b6C1703490b6512FD",
+        ticketBuyToken: "0x5A01Ea01Ba9A8DC2B066714A65E61a78838B1b9e",
         image: null,
     });
 
@@ -40,8 +40,8 @@ export default function CreatePool() {
         open: false
     });
     const [tokens] = useState([
-        { name: "DAI", address: "0xFf795577d9AC8bD7D90Ee22b6C1703490b6512FD" },
-        { name: "USDC", address: "0x752fC0b67FFB55e2261970feaC7223d8657cbF79" }
+        { name: "DAI", address: "0x5A01Ea01Ba9A8DC2B066714A65E61a78838B1b9e" },
+        { name: "USDC", address: "0x65471bdCDb3720Dc07B914756884b50a2b4395fb" }
     ]);
 
     const ipfs = ipfsClient({

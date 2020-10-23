@@ -2,5 +2,5 @@ import * as poolFactory from '../abis/poolFactory.json';
 
 export const config = {
     poolFactoryAbi: poolFactory.default,
-    poolFactoryAddress: "0x7A1C83bdA67A4e521d25f346d7da429d2165cFeF"
+    poolFactoryAddress: "0x7a099ef5B76f188f1AA3419353ff8A7DA681e501"
 }

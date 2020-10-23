@@ -23,8 +23,8 @@ import ClaimPrize from "../ClaimPrize";
 
 export default function ViewPool() {
     let routes;
-    const DAI = "0xFf795577d9AC8bD7D90Ee22b6C1703490b6512FD";
-    const USDC = "0x752fC0b67FFB55e2261970feaC7223d8657cbF79";
+    const DAI = "0x5A01Ea01Ba9A8DC2B066714A65E61a78838B1b9e";
+    const USDC = "0x65471bdCDb3720Dc07B914756884b50a2b4395fb";
     const { poolAddress, nftToken, buyToken } = useParams();
     const [loading, setLoading] = useState(true);
     const [processing, setProcessing] = useState(false);
@@ -127,8 +127,12 @@ export default function ViewPool() {
                     }
                 }
 
-                let erc20Balance = await precision.remove(await erc20Instance
-                    .methods.balanceOf(window.userAddress).call(), 18);
+                let erc20Balance = await precision.remove(
+                    await erc20Instance
+                        .methods.balanceOf(window.userAddress).call(),
+                    await erc20Instance
+                        .methods.decimals().call()
+                );
 
                 setState({
                     totalTicket,
@@ -379,7 +383,7 @@ export default function ViewPool() {
                                         erc20Instance={erc20Instance}
                                         buyToken={buyToken === "DAI" ? "DAI" : "USDC"}
                                         availableBalance={state.erc20Balance}
-                                        balanaceNeeded={state.ticketPrice}
+                                        balanceNeeded={state.ticketPrice}
                                         callback={fetchContractData}
                                     />
                                     : null

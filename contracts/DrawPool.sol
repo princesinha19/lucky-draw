@@ -2,9 +2,11 @@ pragma solidity ^0.6.0;
 import "./interfaces/IERC20.sol";
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC721/IERC721.sol";
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC721/ERC721.sol";
-import "https://raw.githubusercontent.com/smartcontractkit/chainlink/master/evm-contracts/src/v0.6/VRFConsumerBase.sol";
 
-contract DrawPool is VRFConsumerBase, ERC721 {
+// import "https://raw.githubusercontent.com/smartcontractkit/chainlink/master/evm-contracts/src/v0.6/VRFConsumerBase.sol";
+
+// contract DrawPool is VRFConsumerBase, ERC721 {
+contract DrawPool is ERC721 {
     IERC20 public ticketBuyToken;
     uint256 public ticketPrice;
     uint256 public ticketNumber;
@@ -15,8 +17,8 @@ contract DrawPool is VRFConsumerBase, ERC721 {
     uint256 internal nextDrawTimestamp;
     address internal poolWinner;
 
-    bytes32 internal keyHash;
-    uint256 internal fee;
+    // bytes32 internal keyHash;
+    // uint256 internal fee;
 
     event NewBuy(address buyer, uint256 ticketNumber);
 
@@ -33,10 +35,10 @@ contract DrawPool is VRFConsumerBase, ERC721 {
         string memory _tokenURI
     )
         public
-        VRFConsumerBase(
-            0xdD3782915140c8f3b190B5D67eAc6dc5760C46E9, // VRF Coordinator
-            0xa36085F69e2889c224210F603D836748e7dC0088 // LINK Token
-        )
+        // VRFConsumerBase(
+        //     0xdD3782915140c8f3b190B5D67eAc6dc5760C46E9, // VRF Coordinator
+        //     0xa36085F69e2889c224210F603D836748e7dC0088 // LINK Token
+        // )
         ERC721(_name, _symbol)
     {
         ticketBuyToken = IERC20(_ticketBuyToken);
@@ -45,9 +47,10 @@ contract DrawPool is VRFConsumerBase, ERC721 {
         poolStartTime = block.timestamp;
         ticketBuyEndTime = poolStartTime + (_ticketBuyDuration * 1 minutes);
 
-        keyHash = 0x6c3699283bda56ad74f6b855546325b68d482e983852a7a82979cc4807b641f4;
-        fee = 0.1 * 10**18;
         _setBaseURI(_tokenURI);
+
+        // keyHash = 0x6c3699283bda56ad74f6b855546325b68d482e983852a7a82979cc4807b641f4;
+        // fee = 0.1 * 10**18;
     }
 
     function buyTicket() public {
@@ -80,12 +83,15 @@ contract DrawPool is VRFConsumerBase, ERC721 {
             block.timestamp > getNextDrawTimestamp(),
             "Draw is not started yet !!"
         );
-        require(
-            LINK.balanceOf(address(this)) >= fee,
-            "Not enough LINK - fill contract with faucet"
-        );
 
-        requestRandomness(keyHash, fee, userProvidedSeed);
+        // require(
+        //     LINK.balanceOf(address(this)) >= fee,
+        //     "Not enough LINK - fill contract with faucet"
+        // );
+
+        // requestRandomness(keyHash, fee, userProvidedSeed);
+
+        fulfillDraw(userProvidedSeed);
         drawCount++;
 
         setNextDrawTime();
@@ -93,17 +99,12 @@ contract DrawPool is VRFConsumerBase, ERC721 {
         // Send some erc20 to draw excecutor
         ticketBuyToken.transfer(
             msg.sender,
-            ticketPrice * 10**ticketBuyToken.decimals() / 100
+            (ticketPrice * 10**ticketBuyToken.decimals()) / 100
         );
     }
 
-    /**
-     * Callback function used by VRF Coordinator
-     */
-    function fulfillRandomness(bytes32 _requestId, uint256 randomness)
-        internal
-        override
-    {
+    function fulfillDraw(uint256 userProvidedSeed) internal {
+        uint256 randomness = block.timestamp + userProvidedSeed;
         uint256 i = ticketNumber;
 
         do {
@@ -127,6 +128,37 @@ contract DrawPool is VRFConsumerBase, ERC721 {
         drawResult[drawCount] = result;
         alreadyDrawResult[result] = true;
     }
+
+    // /**
+    //  * Callback function used by VRF Coordinator
+    //  */
+    // function fulfillRandomness(bytes32 _requestId, uint256 randomness)
+    //     internal
+    //     override
+    // {
+    //     uint256 i = ticketNumber;
+
+    //     do {
+    //         i--;
+    //     } while (alreadyDrawResult[(randomness % i) + 1] && i > 1);
+
+    //     uint256 result = (randomness % i) + 1;
+
+    //     if (i == 0 || alreadyDrawResult[result]) {
+    //         do {
+    //             result = result + 1;
+    //         } while (alreadyDrawResult[result] && result < ticketNumber);
+    //     }
+
+    //     if (i > ticketNumber || alreadyDrawResult[result]) {
+    //         do {
+    //             result = result - 1;
+    //         } while (alreadyDrawResult[result] && result > 1);
+    //     }
+
+    //     drawResult[drawCount] = result;
+    //     alreadyDrawResult[result] = true;
+    // }
 
     function claimPrize(uint256 _ticketNumber) public {
         require(
@@ -179,7 +211,7 @@ contract DrawPool is VRFConsumerBase, ERC721 {
             drawCount == ticketNumber - 1,
             "Can't get result before all draw !!"
         );
-        
+
         uint256 result;
 
         for (uint256 i = 1; i <= ticketNumber; i++) {
@@ -190,13 +222,13 @@ contract DrawPool is VRFConsumerBase, ERC721 {
 
         return result;
     }
-    
+
     function getPoolWinner() public view returns (address) {
         require(
             drawCount == ticketNumber - 1,
             "Can't get winner before all draw !!"
         );
-        
+
         return poolWinner;
     }
 
@@ -219,21 +251,14 @@ contract DrawPool is VRFConsumerBase, ERC721 {
             nextDrawTimestamp = block.timestamp + (drawInterval * 1 minutes);
         }
     }
-    
+
     function claimReturn() public {
-        require(
-            ticketNumber == 1,
-            "There are more than 1 tickets !!"
-        );
-        require(
-            block.timestamp > ticketBuyEndTime,
-            "Buy period isn't over"
-            );
+        require(ticketNumber == 1, "There are more than 1 tickets !!");
+        require(block.timestamp > ticketBuyEndTime, "Buy period isn't over");
         require(
             _isApprovedOrOwner(_msgSender(), 1),
             "ERC721: transfer caller is not owner nor approved"
         );
-        
 
         transferFrom(msg.sender, address(this), 1);
         _burn(1);
