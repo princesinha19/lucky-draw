@@ -170,7 +170,9 @@ export default function Participate({
                     <Card.Body>
                         <div className="alert-message">
                             You don't have available balance.<br />
-                            Please get some {buyToken} or Use different account.
+                            Please get some {buyToken} using
+                            <a href="#token-faucet"> Token Faucet </a>
+                             or Use different account.
                         </div>
                     </Card.Body>
                 }

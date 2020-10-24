@@ -6,6 +6,7 @@ import {
 } from "react-bootstrap";
 import logo from "../../assets/logo.png"
 import metamask from "../../assets/metamask.png"
+import maticLogo from "../../assets/matic-logo.png"
 import AlertModal from "../Utils/AlertModal";
 import { initContract } from "../../utils/init";
 
@@ -33,12 +34,13 @@ export default function Header() {
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Nav className="mr-auto">
                     <Nav.Link href="#create-pool">Create Pool</Nav.Link>
+                    <Nav.Link href="#token-faucet">Token Faucet</Nav.Link>
                 </Nav>
                 <Nav>
                     <Image
                         style={{ cursor: "pointer" }}
-                        width="60px"
-                        src={metamask}
+                        width="50px"
+                        src={maticLogo}
                         onClick={handleConnectMetamask}
                     />
                 </Nav>

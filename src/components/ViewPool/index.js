@@ -59,6 +59,8 @@ export default function ViewPool() {
 
     const fetchContractData = async () => {
         try {
+            if (!loading) setLoading(true);
+
             let result;
             if (!contractInstance) {
                 result = await createContractInstance();
@@ -412,7 +414,8 @@ export default function ViewPool() {
                                                 <span role="img" aria-label="smile-emoji"> 🙂</span>
                                             </div>
                                             : null
-                                        ) : (Number(state.nftBalance) > 0 && Number(state.drawCount) > 0 ?
+                                        ) : (Number(state.nftBalance) > 0 && Number(state.drawCount) > 0
+                                            && Number(state.drawCount) === Number(state.totalTicket) - 1 ?
                                             <div className="info-message">
                                                 You don't have winner ticket. <br /><br />
 

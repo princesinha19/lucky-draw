@@ -12,6 +12,7 @@ import Header from './components/Header';
 import CreatePool from './components/CreatePool';
 import HomePage from './components/HomePage';
 import ViewPool from './components/ViewPool';
+import TokenFaucet from './components/TokenFaucet';
 
 export default function App() {
     const routes = (
@@ -24,6 +25,9 @@ export default function App() {
             </Route>
             <Route path="/view/:poolAddress/:nftToken/:buyToken" exact>
                 <ViewPool />
+            </Route>
+            <Route path="/token-faucet" exact>
+                <TokenFaucet />
             </Route>
             <Redirect to="/" />
         </Switch>
