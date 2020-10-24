@@ -3,6 +3,7 @@ import ipfsClient from "ipfs-http-client";
 import AlertModal from "../Utils/AlertModal";
 import SuccessModal from "../Utils/SuccessModal";
 import metamask from "../../assets/metamask.png";
+import ipfsLogo from "../../assets/ipfs-logo.png";
 import history from "../Utils/history";
 import {
     Row,
@@ -17,6 +18,7 @@ import {
 } from "react-bootstrap";
 
 export default function CreatePool() {
+    const [deploying, setDeploying] = useState(false);
     const [processing, setProcessing] = useState(false);
     const [addPoolState, setAddPoolState] = useState({
         poolTokenName: "",
@@ -53,8 +55,10 @@ export default function CreatePool() {
     const handleCreatePool = async () => {
         let tokenBaseUrl = "";
         if (addPoolState.image) {
+            setDeploying(true);
             const ipfsHash = await deployImage();
             tokenBaseUrl = `https://ipfs.io/ipfs/${ipfsHash}`;
+            setDeploying(false);
         }
 
         window.poolFactory.methods
@@ -325,15 +329,27 @@ export default function CreatePool() {
                         <Card.Footer className="text-center">
                             <Button
                                 onClick={handleCreatePool}
-                                variant="success"
+                                variant="outline-success"
                             >
-                                {processing ?
+                                {deploying ?
                                     <div className="d-flex align-items-center">
-                                        Processing
-                                <span className="loading ml-2"></span>
+                                        <span>Deploying to </span>
+                                        <Image
+                                            style={{ marginLeft: "5px" }}
+                                            src={ipfsLogo}
+                                            width="25px"
+                                        ></Image>
+                                        <span className="loading ml-2"></span>
                                     </div>
                                     :
-                                    <div>Submit</div>
+                                    (processing ?
+                                        <div className="d-flex align-items-center">
+                                            Processing
+                                        <span className="loading ml-2"></span>
+                                        </div>
+                                        :
+                                        <div>Submit</div>
+                                    )
                                 }
                             </Button>
                         </Card.Footer>
