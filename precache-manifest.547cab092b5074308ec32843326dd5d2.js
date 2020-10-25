@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "c36c9a5067ac9117c0823d47274c4113",
+    "revision": "30ca84bee8da94016d0c64f52205ee76",
     "url": "/lucky-draw/index.html"
   },
   {
