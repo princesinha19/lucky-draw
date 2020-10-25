@@ -1,0 +1,31 @@
+{
+  "files": {
+    "main.css": "/lucky-draw/static/css/main.ec028fca.chunk.css",
+    "main.js": "/lucky-draw/static/js/main.bcd4d233.chunk.js",
+    "main.js.map": "/lucky-draw/static/js/main.bcd4d233.chunk.js.map",
+    "runtime-main.js": "/lucky-draw/static/js/runtime-main.b38a517b.js",
+    "runtime-main.js.map": "/lucky-draw/static/js/runtime-main.b38a517b.js.map",
+    "static/css/2.6414bb7b.chunk.css": "/lucky-draw/static/css/2.6414bb7b.chunk.css",
+    "static/js/2.46025b15.chunk.js": "/lucky-draw/static/js/2.46025b15.chunk.js",
+    "static/js/2.46025b15.chunk.js.map": "/lucky-draw/static/js/2.46025b15.chunk.js.map",
+    "index.html": "/lucky-draw/index.html",
+    "precache-manifest.e114ea6acedb68dcf7afe0396e193951.js": "/lucky-draw/precache-manifest.e114ea6acedb68dcf7afe0396e193951.js",
+    "service-worker.js": "/lucky-draw/service-worker.js",
+    "static/css/2.6414bb7b.chunk.css.map": "/lucky-draw/static/css/2.6414bb7b.chunk.css.map",
+    "static/css/main.ec028fca.chunk.css.map": "/lucky-draw/static/css/main.ec028fca.chunk.css.map",
+    "static/js/2.46025b15.chunk.js.LICENSE.txt": "/lucky-draw/static/js/2.46025b15.chunk.js.LICENSE.txt",
+    "static/media/ipfs-logo.png": "/lucky-draw/static/media/ipfs-logo.6afbd7b3.png",
+    "static/media/logo.png": "/lucky-draw/static/media/logo.48f8ceaf.png",
+    "static/media/matic-logo.png": "/lucky-draw/static/media/matic-logo.5be09fdb.png",
+    "static/media/metamask.png": "/lucky-draw/static/media/metamask.e9ada72b.png",
+    "static/media/no.png": "/lucky-draw/static/media/no.bf5d695c.png",
+    "static/media/yes.png": "/lucky-draw/static/media/yes.e4ba3da3.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.b38a517b.js",
+    "static/css/2.6414bb7b.chunk.css",
+    "static/js/2.46025b15.chunk.js",
+    "static/css/main.ec028fca.chunk.css",
+    "static/js/main.bcd4d233.chunk.js"
+  ]
+}
