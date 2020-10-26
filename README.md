@@ -1,68 +1,25 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## <img src="https://github.com/princesinha19/lucky-draw/blob/master/src/assets/logo.png" height="120" width="140">
 
-## Available Scripts
+It's an NFT based lucky draw where, the last NFT standing wins the game after draws.
 
-In the project directory, you can run:
+The buyer mints NFTs with a unique ticket number by purchasing ticket from the pool. A random ticket is drawn at a fixed time interval and, eliminate the number from the game. With each draw the probability of winning increases. The last standing ticket wins. This game has interesting dynamics in secondary markets which will follow the principles of “Game Theory”.
 
-### `yarn start`
+On each pool creation, a smart contract gets deployed on the Matic Network. The smart contract is written in Solidity and the Frontend is written in React.js. This project uses IPFS to store the NFT image.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+<div>
+ <img src="https://github.com/princesinha19/lucky-draw/blob/master/src/assets/matic-logo.png" height="150" width="150">
+ <img src="https://github.com/princesinha19/lucky-draw/blob/master/src/assets/ipfs-logo.png" height="150" width="150">
+</div>
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+#### Working Application Link
+https://princesinha19.github.io/lucky-draw/
 
-### `yarn test`
+## Demo (Video)
+[![youtube_video](https://img.youtube.com/vi/PJT7y4orddY/0.jpg)](https://youtu.be/PJT7y4orddY) 
+<br> 
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## Steps to Run Locally
+1. Clone the repository
+2. Go inside the cloned project using command `cd lucky-draw`
+3. Install the dependency using command `yarn`
+4. Run command `yarn start`, to start the application.
