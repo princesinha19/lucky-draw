@@ -11,9 +11,6 @@ On each pool creation, a smart contract gets deployed on the Matic Network. The 
  <img src="https://github.com/princesinha19/lucky-draw/blob/master/src/assets/ipfs-logo.png" height="150" width="150">
 </div>
 
-#### Working Application Link
-https://princesinha19.github.io/lucky-draw/
-
 ## Demo (Video)
 [![youtube_video](https://img.youtube.com/vi/PJT7y4orddY/0.jpg)](https://youtu.be/PJT7y4orddY) 
 <br> 
